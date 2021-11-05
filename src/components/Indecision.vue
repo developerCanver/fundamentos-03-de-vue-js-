@@ -1,5 +1,5 @@
 <template>
-<img src="https://via.placeholder.com/250" alt="bg">
+<img v-if="img" :src="img" alt="bg">
 <div class="bg-dark">
 
 </div>
@@ -7,7 +7,8 @@
 <div class="indecision-container">
     <input type="text" v-model="question" placeholder="realiza una pregunta">
     <p>Recuerda terminar con un signo de Interrogación</p>
-    <div>
+
+    <div v-if="isValiQuestion"> 
 
     <h2>{{question}}</h2>
     <h1>{{answer}}</h1>
@@ -24,6 +25,8 @@ data(){
     return{
         question:'',
         answer: null,
+        img:'',
+        isValiQuestion : false,
 
     }
 },
@@ -31,8 +34,11 @@ watch:{
 // es para mitigar si hay cambios
  question(value, oldValue){ 
      //tiene que llamarse igual que la propiedad que se asigno
+     this.isValiQuestion=false
  
     if (!value.includes('?')) return
+
+    this.isValiQuestion=true
     this.getAnswer()
 
     },
@@ -41,8 +47,11 @@ methods:{
   async getAnswer(){
       this.answer='Pensando..'
 
-      const { resp } = await fetch('https://yesno.wtf/api').then( r=> r.json())
-      console.log(resp)
+      const  resp  = await fetch('https://yesno.wtf/api').then( r=> r.json())
+     
+      this.img=resp.image
+      this.answer= resp.answer === 'yes' ? 'SI!' : ' NO' 
+
 
   }
 }
