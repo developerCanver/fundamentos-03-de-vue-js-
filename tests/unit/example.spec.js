@@ -2,7 +2,7 @@ describe('Exampre Component',()=>{
 
   test('Debe de ser Mayor a 10 ', () => {
     //Arreglar
-    let value =5;
+    let value =10;
     
 
     //Estimulo
