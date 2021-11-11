@@ -8,10 +8,8 @@ describe('Counter Component',()=>{
     //Arreglar
     let value =10;
     
-    //tomar una co´piar del archivo counter
+    //tomar una copiar del archivo counter
     expect( ALGO ).toMatchSnapshot()
   
-  })
-  
-
+  }) 
 })
